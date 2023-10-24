@@ -1,11 +1,13 @@
 import Navbar from '../components/navbar/navbar'
 import Feed from '../components/feed/feed'
 import PostList from './Postlist'
+import User from '../components/user/User'
+
 
 function App() {
   return (
-    <div className="App bg-zinc-800 h-full">
-      <PostList />
+    <div className="App">
+      <Feed />
     </div>
   );
 }

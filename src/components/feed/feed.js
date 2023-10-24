@@ -1,39 +1,49 @@
 import Post from '../post/post';
+import React, { useState, useEffect } from 'react'
 
 const Feed = () => {
+    const [ posts, setPosts ] = useState([]);
+
+    useEffect(() => {
+        fetch('https://dummyapi.io/data/v1/post', {
+            headers: {
+                'app-id': process.env.REACT_APP_API_KEY,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => setPosts(data.data))
+            .catch((error) => console.error('Error', error));
+    }, []); 
+
+    useEffect(() => {
+        fetch('https://dummyapi.io/data/v1/post', {
+            headers: {
+                'app-id': process.env.REACT_APP_API_KEY,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => setPosts(data.data))
+            .catch((error) => console.error('Error', error));
+    }, []); 
 
     return (
-        <div className="w-8/12 mx-auto max-w-2xl">
-            <Post 
-                user={"Kim"}
-                time={Math.ceil(Math.random() * 60)}
-                likes={Math.floor(Math.random() * 999)}
-                comments={Math.floor(Math.random() * 666)}
-                cat={700}
-            />
-            <Post 
-                user={"Barry"}
-                time={Math.ceil(Math.random() * 60)}
-                likes={Math.floor(Math.random() * 999)}
-                comments={Math.floor(Math.random() * 666)}
-                cat={800}
-            />
-            <Post 
-                user={"Steve"}
-                time={Math.ceil(Math.random() * 60)}
-                likes={Math.floor(Math.random() * 999)}
-                comments={Math.floor(Math.random() * 666)}
-                cat={750}
-            />
-            <Post 
-                user={"Dylan"}
-                time={Math.ceil(Math.random() * 60)}
-                likes={Math.floor(Math.random() * 999)}
-                comments={Math.floor(Math.random() * 666)}
-                cat={700}
-            />
-        </div>
+        <>
+            {posts.map((post) => (
+                <Post 
+                    key={post}
+                    userFirst={post.owner.firstName}
+                    userLast={post.owner.lastName}
+                    text={post.text}
+                    likes={post.likes}
+                    pp={post.owner.picture}
+                    time={post.publishDate}
+                    tags={post.tags}
+                    content={post.image}
+                />
+            ))}
+        </>
     )
 }
 
 export default Feed;
+

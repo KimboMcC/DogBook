@@ -6,6 +6,9 @@
 
 /* Your custom CSS can go here */
 
+HTML {
+  background-color: rgb(24, 24, 24);
+}
 
 body {
   margin: 0;
