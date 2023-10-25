@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment, faClock } from '@fortawesome/free-regular-svg-icons';
 import Tag from '../tag/Tag'
@@ -31,8 +32,20 @@ function getTimeAgo(APItime) {
     }
 
 const Post = ( props ) => {
-    const { userFirst, userLast, time, text, likes, comments, pp, tags, content } = props
+    const { userFirst, userLast, time, text, likes, pp, tags, key, postKey, content, } = props
     const timeAgo = getTimeAgo(time);
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+        fetch(`https://dummyapi.io/data/v1/post/${postKey}/comment`, {
+          headers: {
+            'app-id': process.env.REACT_APP_API_KEY,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => setComments(data.data))
+          .catch((error) => console.error('Error', error));
+      }, []);
 
     return (
         <div className="whole/post text-white mb-2">
@@ -56,15 +69,21 @@ const Post = ( props ) => {
                             <p className='font-medium w-full'>{text}</p>
                         <div className='flex justify-between'>
                             <div className='flex'>
-                                {tags.map((tag) => (
-                                    <Tag tags={tag}/>
+                                {tags.map((tag, index) => (
+                                    <Tag key={index} tags={tag}/>
                                 ))}
                             </div>
                             <div className="interactions items-center flex w-min">
                                 <p className='mr-2 font-medium'>{likes}</p>
                                 <FontAwesomeIcon icon={faHeart} />
                             </div>
+                            
                         </div>
+                        {comments.length > 0 ? (
+                            comments.map((comment) => (
+                                <p key={comment.id}>{comment.message}</p>
+                            ))) : ( <p>No comments available.</p>)
+                        }
                     </div>
             </div>
         </div>    
