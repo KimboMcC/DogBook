@@ -35,13 +35,13 @@ const Post = ( props ) => {
     const timeAgo = getTimeAgo(time);
 
     return (
-        <div className="whole/post text-white w-full mb-2">
+        <div className="whole/post text-white mb-2">
             <div className=''>
                 <img src={content}></img>
             </div>
             <div className='flex justify-between p-4 mt-2'>
                 <div className='gap-7 flex-col flex w-full'>
-                    <div className="flex space-around justify-between items-center">
+                    <div className="flex space-around justify-between items-center ">
                         <div className='flex items-center'>
                             <div className='w-10 h-10 mr-4'>
                                 <img className='rounded-xl' src={pp}></img>
@@ -53,7 +53,7 @@ const Post = ( props ) => {
                             <FontAwesomeIcon icon={faClock} />
                         </div>
                         </div>
-                            <p className='font-medium max-w-2xl'>{text}</p>
+                            <p className='font-medium w-full'>{text}</p>
                         <div className='flex justify-between'>
                             <div className='flex'>
                                 {tags.map((tag) => (

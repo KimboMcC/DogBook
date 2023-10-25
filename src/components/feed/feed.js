@@ -5,7 +5,7 @@ const Feed = () => {
     const [ posts, setPosts ] = useState([]);
 
     useEffect(() => {
-        fetch('https://dummyapi.io/data/v1/post', {
+        fetch('https://dummyapi.io/data/v1/post?limit=50', {
             headers: {
                 'app-id': process.env.REACT_APP_API_KEY,
             },
@@ -15,16 +15,6 @@ const Feed = () => {
             .catch((error) => console.error('Error', error));
     }, []); 
 
-    useEffect(() => {
-        fetch('https://dummyapi.io/data/v1/post', {
-            headers: {
-                'app-id': process.env.REACT_APP_API_KEY,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => setPosts(data.data))
-            .catch((error) => console.error('Error', error));
-    }, []); 
 
     return (
         <>
