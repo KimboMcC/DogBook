@@ -2,7 +2,7 @@ import Navbar from '../components/navbar/navbar'
 import Feed from '../components/feed/feed'
 import PostList from './Postlist'
 import User from '../components/user/User'
-import Commentz from '../components/feed/comments'
+import Comment from '../components/comments/comment'
 
 
 function App() {
