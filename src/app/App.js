@@ -8,6 +8,7 @@ import Comment from '../components/comments/comment'
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <Feed />
     </div>
   );

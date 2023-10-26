@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react';
-import { faHeart, faComment, faClock } from '@fortawesome/free-regular-svg-icons';
+import { faHeart, faComment, faClock, faBookmark } from '@fortawesome/free-regular-svg-icons';
 import Tag from '../tag/Tag'
 import Commentz from '../comments/comment';
 import CommentSection from '../comments/CommentSection';
@@ -82,6 +82,9 @@ const Post = ( props ) => {
                             <div className="interactions items-center flex w-min">
                                     <p className='mr-2 font-medium'>{comments.length}</p>
                                     <FontAwesomeIcon icon={faComment} />
+                            </div>
+                            <div className="interactions items-center flex w-min">
+                                    <FontAwesomeIcon icon={faBookmark} />
                             </div>
                         </div>
                         <AddComment />
