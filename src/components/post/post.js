@@ -59,7 +59,7 @@ const Post = ( props ) => {
                     <div className="flex space-around justify-between items-center">
                         <div className='flex items-center'>
                             <div className='w-12 mr-4'>
-                                <img className='rounded-full' src={pp}></img>
+                                <img className='rounded-full' alt="User profile picture" src={pp}></img>
                             </div>
                             <p className='font-medium'>{userFirst} {userLast}</p>
                         </div>
