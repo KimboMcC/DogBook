@@ -1,10 +1,10 @@
-import Feed from '../components/feed/feed'
+import DiscoverFeed from '../components/discover/DiscoverFeed'
 
 const Discover = () => {
 
     return (
         <>        
-            <Feed/>
+            <DiscoverFeed />
         </>
 
     )

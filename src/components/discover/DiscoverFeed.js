@@ -1,7 +1,7 @@
 import Post from '../post/post';
 import React, { useState, useEffect } from 'react';
 
-const Feed = () => {
+const DiscoverFeed = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -38,4 +38,4 @@ const Feed = () => {
   );
 }
 
-export default Feed;
+export default DiscoverFeed;
