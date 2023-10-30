@@ -1,5 +1,4 @@
 import Commentz from './comment';
-import AddComment from './AddComment';
 
 const CommentSection = ( props ) => {
     const { comments } = props

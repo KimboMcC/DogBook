@@ -11,10 +11,10 @@ const AddComment = ({ addComment }) => {
         addComment({
             message: comment,
             owner: {
-                firstName: 'steve',
-                lastName: 'Steveson',
-                id: '08236423492347',
-                picture: 'http://placekitten.com/200/200'
+                firstName: 'steve', //Import created name from REDUX
+                lastName: 'Steveson', //Import created name from REDUX
+                id: '08236423492347', //Import from REDUX. will have to create a random placeholder ID
+                picture: 'http://placekitten.com/200/200' //Import created PP from REDUX
             },
             post: '06292347',
             key: `${Math.floor(Math.random() * 99999)}`

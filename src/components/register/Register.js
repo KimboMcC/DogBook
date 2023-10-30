@@ -11,7 +11,7 @@ const Register = () => {
             <h2>Choose a nickname:</h2>
 
             <form>
-                <label for="userName">Your public username: <i className="italic">No special characters!</i></label>
+                <label for="userName">First name & LastNAme MAKE DIFFERENT INPUTS. HAS TO BE FIRST & LAST TO FIT IN WITH API DATA<i className="italic">No special characters!</i></label>
                 <input type='text' id="userName" name="userName"/>
                 <input type="radio" name="pp_option" id="pp1"/>
                 <input type="radio" name="pp_option" id="pp2"/>
