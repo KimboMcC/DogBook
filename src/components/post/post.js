@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react';
 import { faHeart, faComment, faClock, faBookmark } from '@fortawesome/free-regular-svg-icons';
 import Tag from '../tag/Tag'
-import Commentz from '../comments/comment';
+
 import CommentSection from '../comments/CommentSection';
 import AddComment from '../comments/AddComment';
 
@@ -31,12 +31,23 @@ function getTimeAgo(APItime) {
       }  else {
         return `< 1m`;
       }
-    }
+}
+
+
 
 const Post = ( props ) => {
     const { userFirst, userLast, time, text, likes, pp, tags, postKey, content, } = props
     const timeAgo = getTimeAgo(time);
     const [comments, setComments] = useState([]);
+    const [ isVisible, setIsVisible ] = useState(false)
+
+    function toggleComments() {
+        setIsVisible(!isVisible)
+    }
+
+    const addComment = (newComment) => {
+        setComments([newComment, ...comments])
+    }
 
     useEffect(() => {
         fetch(`https://dummyapi.io/data/v1/post/${postKey}/comment`, {
@@ -59,7 +70,7 @@ const Post = ( props ) => {
                     <div className="flex space-around justify-between items-center">
                         <div className='flex items-center'>
                             <div className='w-12 mr-4'>
-                                <img className='rounded-full' alt="User profile picture" src={pp}></img>
+                                <img className='rounded-full' alt="User profile" src={pp}></img>
                             </div>
                             <p className='font-medium'>{userFirst} {userLast}</p>
                         </div>
@@ -79,7 +90,7 @@ const Post = ( props ) => {
                                     <p className='mr-2 font-medium'>{likes}</p>
                                     <FontAwesomeIcon icon={faHeart} />
                             </div>
-                            <div className="interactions items-center flex w-min">
+                            <div onClick={toggleComments} className="interactions items-center flex w-min">
                                     <p className='mr-2 font-medium'>{comments.length}</p>
                                     <FontAwesomeIcon icon={faComment} />
                             </div>
@@ -87,8 +98,12 @@ const Post = ( props ) => {
                                     <FontAwesomeIcon icon={faBookmark} />
                             </div>
                         </div>
-                        <AddComment />
-                        <CommentSection comments={comments}/>
+                        <AddComment addComment={addComment}/> 
+                        { isVisible && <CommentSection comments={comments}/> }
+                        { comments.length > 0 ? isVisible ? 
+                            <p className="-my-2 mx-auto font-light  text-sm" onClick={toggleComments}>Hide comments</p>
+                            : <p className="-my-2 mx-auto font-light  text-sm" onClick={toggleComments}>View all comments</p> : null}
+                        
                         
                     </div>
             </div>
@@ -97,3 +112,4 @@ const Post = ( props ) => {
 }
 
 export default Post;
+
