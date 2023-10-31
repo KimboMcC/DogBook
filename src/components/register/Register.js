@@ -27,7 +27,7 @@ const Register = () => {
   };
 
   const nextPage =() => {
-    navigate("/discover")
+    
   }
 
   const handlePictureChange = (event) => {
@@ -38,7 +38,7 @@ const Register = () => {
     event.preventDefault();
     account.picture = selectedPicture;
     console.log(account);
-    
+    navigate("/discover")
   };
 
   return (
@@ -117,7 +117,7 @@ const Register = () => {
             <img src={pp4} alt="Option 4" width="60px" />
           </label>
         </div>
-        <button type="submit" onClick={nextPage}>Submit and continue</button>
+        <button type="submit">Submit and continue</button>
       </form>
     </div>
   );
