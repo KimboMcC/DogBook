@@ -3,42 +3,38 @@ import pp1 from '../../images/Rectangle 1.svg';
 import pp2 from '../../images/Rectangle 2.svg';
 import pp3 from '../../images/Rectangle 3.png';
 import pp4 from '../../images/Rectangle 4.svg';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { selectUser } from '../../redux/accounts/accountsSlice';
+import { logIn } from '../../redux/accounts/accountsSlice';
 
 const Register = () => {
     const navigate = useNavigate()
-
-    const [account, setAccount] = useState({
-    firstName: '',
-    lastName: '',
-    picture: '',
-  });
-
-  const [selectedPicture, setSelectedPicture] = useState('');
+    const user = useSelector(selectUser)
+    const dispatch = useDispatch()
+    const [ fName, setFName ] = useState("")
+    const [ lName, setLName ] = useState("") 
+    const [ selectedPicture, setSelectedPicture ] = useState('')
+    const [test, setTest] = useState(false)
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setAccount({
-      ...account,
-      [name]: value,
-    });
+    name === 'firstName' ? setFName(value) : setLName(value) 
   };
 
-  const nextPage =() => {
-    
-  }
-
   const handlePictureChange = (event) => {
-    setSelectedPicture(event.target.value);
+    const { value } = event.target
+    setSelectedPicture(value)
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    account.picture = selectedPicture;
-    console.log(account);
-    navigate("/discover")
+    //selectedPicture;
+   // dispatchEvent(logIn({firstName: name, lastName: ))
+    console.log( fName + lName + selectedPicture);
+    //navigate("/discover")
+    setTest(true)
   };
 
   return (
@@ -58,7 +54,7 @@ const Register = () => {
           type="text"
           id="firstName"
           name="firstName"
-          value={account.firstName}
+          
           onChange={handleChange}
         />
         <br />
@@ -68,7 +64,7 @@ const Register = () => {
           type="text"
           id="lastName"
           name="lastName"
-          value={account.lastName}
+          
           onChange={handleChange}
         />
         <br />
@@ -81,7 +77,7 @@ const Register = () => {
               type="radio"
               name="picture"
               value={pp1}
-              checked={selectedPicture === pp1}
+              //checked={selectedPicture === pp1}
               onChange={handlePictureChange}
             />
             <img src={pp1} alt="Option 1" width="60px" />
@@ -91,7 +87,7 @@ const Register = () => {
               type="radio"
               name="picture"
               value={pp2}
-              checked={selectedPicture === pp2}
+             //checked={selectedPicture === pp2}
               onChange={handlePictureChange}
             />
             <img src={pp2} alt="Option 2" width="60px" />
@@ -101,7 +97,7 @@ const Register = () => {
               type="radio"
               name="picture"
               value={pp3}
-              checked={selectedPicture === pp3}
+              //checked={selectedPicture === pp3}
               onChange={handlePictureChange}
             />
             <img src={pp3} alt="Option 3" width="60px" />
@@ -111,7 +107,7 @@ const Register = () => {
               type="radio"
               name="picture"
               value={pp4}
-              checked={selectedPicture === pp4}
+              //checked={selectedPicture === pp4}
               onChange={handlePictureChange}
             />
             <img src={pp4} alt="Option 4" width="60px" />
@@ -119,6 +115,7 @@ const Register = () => {
         </div>
         <button type="submit">Submit and continue</button>
       </form>
+      {test ? <><p>{fName + lName}</p><img src={selectedPicture}></img> </>: null}
     </div>
   );
 };

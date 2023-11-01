@@ -5,7 +5,7 @@ import Header from '../components/header/Header'
 import { Outlet } from 'react-router-dom';
 
 const Root = () => {
-  const loggedIn = true;
+  const loggedIn = false;
 
   return (
     <>
