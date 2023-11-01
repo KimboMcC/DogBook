@@ -1,20 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../redux/accounts/accountsSlice'
+
 
 const AddComment = ({ addComment }) => {
     const [ comment, setComment ] = useState('')
+    const user = useSelector(selectUser)
 
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent the form from actually submitting
-        console.log(comment); // Log the comment value
         addComment({
             message: comment,
             owner: {
-                firstName: 'steve', //Import created name from REDUX
-                lastName: 'Steveson', //Import created name from REDUX
-                id: '08236423492347', //Import from REDUX. will have to create a random placeholder ID
-                picture: 'http://placekitten.com/200/200' //Import created PP from REDUX
+                firstName: user.firstName, //Import created name from REDUX
+                lastName: user.lastName, //Import created name from REDUX
+                id: user.id, //Import from REDUX. will have to create a random placeholder ID
+                picture: user.pp //Import created PP from REDUX
             },
             post: '06292347',
             key: `${Math.floor(Math.random() * 99999)}`
@@ -27,7 +30,7 @@ const AddComment = ({ addComment }) => {
         <div className="bg-zinc-800 flex rounded-md p-2 px-3">
             <div className='flex w-full'>
                 <div className='w-10 h-10 pt-0.5 mr-2'>
-                    <img className="rounded-full" src='http://placekitten.com/200/200' alt="profile"/>
+                    <img className="rounded-full" src={user.pp} alt="profile"/>
                 </div>
                 <form className='flex justify-between w-full items-center' onSubmit={handleSubmit}>
                     <input

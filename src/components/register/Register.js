@@ -1,22 +1,20 @@
 import './register.css';
-import pp1 from '../../images/Rectangle 1.svg';
-import pp2 from '../../images/Rectangle 2.svg';
+import pp1 from '../../images/Rectangle 1.png';
+import pp2 from '../../images/Rectangle 2.png';
 import pp3 from '../../images/Rectangle 3.png';
-import pp4 from '../../images/Rectangle 4.svg';
-import { useSelector, useDispatch } from 'react-redux';
+import pp4 from '../../images/Rectangle 4.png';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { selectUser } from '../../redux/accounts/accountsSlice';
 import { logIn } from '../../redux/accounts/accountsSlice';
+
 
 const Register = () => {
     const navigate = useNavigate()
-    const user = useSelector(selectUser)
     const dispatch = useDispatch()
     const [ fName, setFName ] = useState("")
     const [ lName, setLName ] = useState("") 
     const [ selectedPicture, setSelectedPicture ] = useState('')
-    const [test, setTest] = useState(false)
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -30,12 +28,11 @@ const Register = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //selectedPicture;
-   // dispatchEvent(logIn({firstName: name, lastName: ))
-    console.log( fName + lName + selectedPicture);
-    //navigate("/discover")
-    setTest(true)
+    dispatch(logIn({firstName: fName, lastName: lName, pp: selectedPicture}))
+    navigate("/discover")
   };
+  
+ 
 
   return (
     <div className="text-white p-4">
@@ -54,7 +51,7 @@ const Register = () => {
           type="text"
           id="firstName"
           name="firstName"
-          
+          required
           onChange={handleChange}
         />
         <br />
@@ -64,7 +61,7 @@ const Register = () => {
           type="text"
           id="lastName"
           name="lastName"
-          
+          required
           onChange={handleChange}
         />
         <br />
@@ -79,6 +76,7 @@ const Register = () => {
               value={pp1}
               //checked={selectedPicture === pp1}
               onChange={handlePictureChange}
+              required
             />
             <img src={pp1} alt="Option 1" width="60px" />
           </label>
@@ -89,6 +87,7 @@ const Register = () => {
               value={pp2}
              //checked={selectedPicture === pp2}
               onChange={handlePictureChange}
+              required
             />
             <img src={pp2} alt="Option 2" width="60px" />
           </label>
@@ -99,6 +98,7 @@ const Register = () => {
               value={pp3}
               //checked={selectedPicture === pp3}
               onChange={handlePictureChange}
+              required
             />
             <img src={pp3} alt="Option 3" width="60px" />
           </label>
@@ -109,13 +109,13 @@ const Register = () => {
               value={pp4}
               //checked={selectedPicture === pp4}
               onChange={handlePictureChange}
+              required
             />
             <img src={pp4} alt="Option 4" width="60px" />
           </label>
         </div>
         <button type="submit">Submit and continue</button>
       </form>
-      {test ? <><p>{fName + lName}</p><img src={selectedPicture}></img> </>: null}
     </div>
   );
 };
