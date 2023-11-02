@@ -1,31 +1,59 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/accounts/accountsSlice'
+import { addComment, selectComments } from '../../redux/comments/commentsSlice';
 
 
-const AddComment = ({ addComment }) => {
+const AddComment = ( props ) => {
+    const { postKey } = props
     const [ comment, setComment ] = useState('')
     const user = useSelector(selectUser)
+    const dispatch = useDispatch()
+    const commentArray = useSelector(selectComments)
+    
 
+    function getCurrentDateAsString() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        const milliseconds = now.getMilliseconds();
+      
+        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}Z`;
+      }
+      
+      const currentDateString = getCurrentDateAsString();
+      
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent the form from actually submitting
-        addComment({
-            message: comment,
-            owner: {
-                firstName: user.firstName, //Import created name from REDUX
-                lastName: user.lastName, //Import created name from REDUX
-                id: user.id, //Import from REDUX. will have to create a random placeholder ID
-                picture: user.pp //Import created PP from REDUX
-            },
-            post: '06292347',
-            key: `${Math.floor(Math.random() * 99999)}`
-        })
-        setComment('')
-      };
-
       
+        // Define the comment object
+        const newComment = {
+          message: comment,
+          owner: {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            id: user.id,
+            picture: user.pp,
+          },
+          post: postKey, // Use postKey directly
+          id: `${Math.floor(Math.random() * 99999)}`,
+          publishDate: currentDateString
+        };
+      
+        // Dispatch the action to add the comment
+        dispatch(addComment(newComment));
+      
+        // Clear the comment input field
+        setComment('');
+      };
+      
+
     return (
         <div className="bg-zinc-800 flex rounded-md p-2 px-3">
             <div className='flex w-full'>

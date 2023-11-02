@@ -21,6 +21,8 @@ const Register = () => {
     name === 'firstName' ? setFName(value) : setLName(value) 
   };
 
+  
+
   const handlePictureChange = (event) => {
     const { value } = event.target
     setSelectedPicture(value)

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-    const response = await fetch('https://dummyapi.io/data/v1/post', {
+    const response = await fetch('https://dummyapi.io/data/v1/post/?limit=20', {
     headers: {
       'app-id': process.env.REACT_APP_API_KEY,
     },
@@ -25,10 +25,6 @@ const postSlice = createSlice ({
             const postIndex = state.postArray.findIndex((post) => post.id === action.payload.postId)
             state.postArray[postIndex].likes -= 1
         },
-        addComment: (state, action) => {
-            const postIndex = state.postArray.findIndex((post) => post.id === action.payload.postId)
-            //state.postArray[postIndex].
-        }
     },
     extraReducers: (builder) => {
         builder
@@ -46,6 +42,6 @@ const postSlice = createSlice ({
     }
 })
 
-export const { addLike, removeLike, addComment } = postSlice.actions
+export const { addLike, removeLike } = postSlice.actions
 export const selectPosts = ( state ) => state.posts
 export default postSlice.reducer

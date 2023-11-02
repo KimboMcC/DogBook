@@ -9,8 +9,8 @@ const Profile = () => {
     return (
         <div>        
             <div className="flex flex-col justify-center py-6 bg-zinc-600">
-                <img className="mx-auto mb-2" src={pp1} width="120px" alt="user profile"></img>
-                <h2 className="text-3xl mx-auto text-white font-semibold">Tomithy Charlemain</h2>
+                <img className="mx-auto mb-2" src={user.pp} width="120px" alt="user profile"></img>
+                <h2 className="text-3xl mx-auto text-white font-semibold">{user.firstName}{user.lastName}</h2>
             </div>
         </div>
 

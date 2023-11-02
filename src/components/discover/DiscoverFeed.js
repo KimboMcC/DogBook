@@ -2,15 +2,18 @@ import Post from '../post/post';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { selectPosts } from '../../redux/posts/postsSlice';
+import { selectComments } from '../../redux/comments/commentsSlice';
+import { useDispatch } from 'react-redux';
 
 
 const DiscoverFeed = () => {
   const [posts, setPosts] = useState([]);
-  const postsState = useSelector(selectPosts);
-  const { postArray, loading } = postsState;
+  const { postArray, loading } = useSelector(selectPosts);
+  const { commentArray } = useSelector(selectComments);
+  const dispatch = useDispatch()
+  
 
   if (postArray.length === 0) {
-    console.log(postsState)
     return <div>No posts available.</div>;
   }
 
@@ -33,8 +36,11 @@ const DiscoverFeed = () => {
           />
         );
       })}
+
     </>
+  
   );
+  
 }
 
 export default DiscoverFeed;

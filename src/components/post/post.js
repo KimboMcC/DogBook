@@ -2,9 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react';
 import { faHeart, faComment, faClock, faBookmark } from '@fortawesome/free-regular-svg-icons';
 import Tag from '../tag/Tag'
-
+import { loadComment, selectComments } from '../../redux/comments/commentsSlice';
 import CommentSection from '../comments/CommentSection';
 import AddComment from '../comments/AddComment';
+import { useDispatch, useSelector } from 'react-redux';
+import { addLike, removeLike } from '../../redux/posts/postsSlice';
 
 function getTimeAgo(APItime) {
     const apiDate = new Date(APItime)
@@ -37,26 +39,43 @@ const Post = ( props ) => {
     const { userFirst, userLast, time, text, likes, pp, tags, postKey, content, } = props
     const timeAgo = getTimeAgo(time);
     const [comments, setComments] = useState([]);
+    const [postComments, setPostComments] = useState([])
     const [ isVisible, setIsVisible ] = useState(false)
+    const {commentArray} = useSelector(selectComments)
+    const dispatch = useDispatch()
 
     function toggleComments() {
         setIsVisible(!isVisible)
+        console.log(postComments)
     }
 
-    const addComment = (newComment) => {
-        setComments([newComment, ...comments])
+    function likePlus() {
+        dispatch(addLike(postKey))
     }
 
     useEffect(() => {
         fetch(`https://dummyapi.io/data/v1/post/${postKey}/comment`, {
-          headers: {
+            headers: {
             'app-id': process.env.REACT_APP_API_KEY,
-          },
+            },
         })
-          .then((response) => response.json())
-          .then((data) => setComments(data.data))
-          .catch((error) => console.error('Error', error));
-      }, []);
+            .then((response) => response.json())
+            .then((data) => {
+            const newComments = data.data.filter((newComment) => {
+                // Check if the comment already exists in your Redux store
+                return !commentArray.some((existingComment) => existingComment.id === newComment.id);
+            });
+
+            // Dispatch only the new comments to your Redux store
+            dispatch(loadComment(newComments));
+            })
+            .catch((error) => console.error('Error', error));
+    }, [ dispatch, postKey ]);
+
+    useEffect(() => {
+        const newPostComments = commentArray.filter((comment) => comment.post === postKey);
+        setPostComments(newPostComments);
+      }, [commentArray, postKey]);
 
     return (
         <div className="whole/post text-white mb-2 w">
@@ -86,23 +105,21 @@ const Post = ( props ) => {
                         <div className='flex justify-around'>
                             <div className="interactions items-center flex w-min">
                                     <p className='mr-2 font-medium'>{likes}</p>
-                                    <FontAwesomeIcon icon={faHeart} />
+                                    <FontAwesomeIcon icon={faHeart} onClick={likePlus}/>
                             </div>
                             <div onClick={toggleComments} className="interactions items-center flex w-min">
-                                    <p className='mr-2 font-medium'>{comments.length}</p>
+                                    <p className='mr-2 font-medium'>{postComments.length}</p>
                                     <FontAwesomeIcon icon={faComment} />
                             </div>
                             <div className="interactions items-center flex w-min">
                                     <FontAwesomeIcon icon={faBookmark} />
                             </div>
                         </div>
-                        <AddComment addComment={addComment}/> 
-                        { isVisible && <CommentSection comments={comments}/> }
-                        { comments.length > 0 ? isVisible ? 
+                        <AddComment postKey={postKey}/> 
+                        { isVisible && <CommentSection comments={postComments}/> }
+                        { postComments.length > 0 ? isVisible ? 
                             <p className="-my-2 mx-auto font-light  text-sm" onClick={toggleComments}>Hide comments</p>
                             : <p className="-my-2 mx-auto font-light  text-sm" onClick={toggleComments}>View all comments</p> : null}
-                        
-                        
                     </div>
             </div>
         </div>    

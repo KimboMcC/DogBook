@@ -21,10 +21,9 @@ const router = createBrowserRouter( createRoutesFromElements (
   </Route>
 ))
 
-
 function App() {
   const dispatch = useDispatch()
-  const { loading } = useSelector(selectPosts)
+  const { loading, postArray } = useSelector(selectPosts)
 
   useEffect(() => {
     dispatch(fetchPosts())
