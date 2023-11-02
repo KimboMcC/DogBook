@@ -8,7 +8,6 @@ import { selectUser } from '../redux/accounts/accountsSlice';
 import { useEffect } from 'react';
 
 
-
 const Root = () => {
   const user = useSelector(selectUser);
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ const Root = () => {
     <>
       {user.loggedIn ? (
         <>
-          <Header />
+          
           <div className='flex justify-around py-6 fixed inset-x-0 bottom-0 z-50 bg-zinc-800 text-white'>
             <Link to='/discover'> <Sections icon={faHouse} /> </Link>
             <Link to="search"> <Sections icon={faMagnifyingGlass} /> </Link>

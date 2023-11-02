@@ -31,44 +31,43 @@ const Register = () => {
     dispatch(logIn({firstName: fName, lastName: lName, pp: selectedPicture}))
     navigate("/discover")
   };
-  
  
-
+ //ADD SIGN-UP NOW TEXT/register
   return (
-    <div className="text-white p-4">
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl mb-2 font-bold">Welcome to PETBOOK!</h1>
-        <p className="text-md mb-2">
-          The internet's best and cutest pet social-media app.
-        </p>
-        <p className="text-sm">Share, save, and scroll through pet photos. Cute!</p>
+    <div className="text-white p-">
+      <div className="mb-8 mt-8 text-center">
+        <p className="text-xl mb-1 font-light">Welcome to</p>
+        <h1 className="text-5xl mb-16 font-extrabold tracking-wide">PETBOOK</h1>
       </div>
-      <form onSubmit={handleSubmit}>
-        <h2 className="text-lg uppercase mb-4 font-semibold">Create account:</h2>
-        <label htmlFor="firstName">Your first name: </label>
-        <input
-          className="bg-zinc-700 mb-2 rounded-md p-0.5"
-          type="text"
-          id="firstName"
-          name="firstName"
-          required
-          onChange={handleChange}
-        />
-        <br />
-        <label htmlFor="lastName">Your last name: </label>
-        <input
-          className="bg-zinc-700 rounded-md p-0.5"
-          type="text"
-          id="lastName"
-          name="lastName"
-          required
-          onChange={handleChange}
-        />
-        <br />
-        <p className="font-semibold text-md uppercase mb-4 mt-8">
-          Select a profile picture from the choices below:
-        </p>
-        <div className="grid px-6 grid-cols-4 py-4 justify-items-center">
+      <form onSubmit={handleSubmit} className="flex flex-col items-center">
+        <h2 className='text-lg mb-6 font-semibold border-b-2 text-center'>Enter your name:</h2>
+        <div className='justify-center flex mb-4'>
+          <label htmlFor="firstName" className='mr-2'>First name: </label>
+          <input
+            className="rounded-sm bg-zinc-800 border-white p-0.5 outline-2 focus:outline-white focus:outline focus:outline-opacity-50"
+            type="text"
+            id="firstName"
+            name="firstName"
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div className='justify-center flex'>
+          <label htmlFor="lastName" className='mr-2'>Last name: </label>
+          <input
+            className="rounded-sm bg-zinc-800 border-white p-0.5 outline-2 focus:outline-white focus:outline focus:outline-opacity-50"
+            type="text"
+            id="lastName"
+            name="lastName"
+            required
+            onChange={handleChange}
+          />
+        </div>
+        
+        <h2 className="text-lg mb-6 font-semibold border-b-2 text-center mt-12">
+          Choose a profile picture:
+        </h2>
+        <div className="grid px-5 grid-cols-4 w-full justify-items-center">
           <label className="mb-4">
             <input
               type="radio"
@@ -78,7 +77,7 @@ const Register = () => {
               onChange={handlePictureChange}
               required
             />
-            <img src={pp1} alt="Option 1" width="60px" />
+            <img src={pp1} alt="Option 1" width="70px" />
           </label>
           <label className="mb-4">
             <input
@@ -89,7 +88,7 @@ const Register = () => {
               onChange={handlePictureChange}
               required
             />
-            <img src={pp2} alt="Option 2" width="60px" />
+            <img src={pp2} alt="Option 2" width="70px" />
           </label>
           <label className="mb-4">
             <input
@@ -100,7 +99,7 @@ const Register = () => {
               onChange={handlePictureChange}
               required
             />
-            <img src={pp3} alt="Option 3" width="60px" />
+            <img src={pp3} alt="Option 3" width="70px" />
           </label>
           <label className="mb-4">
             <input
@@ -111,10 +110,10 @@ const Register = () => {
               onChange={handlePictureChange}
               required
             />
-            <img src={pp4} alt="Option 4" width="60px" />
+            <img src={pp4} alt="Option 4" width="70px" />
           </label>
         </div>
-        <button type="submit">Submit and continue</button>
+        <button type="submit" className='mt-16 py-3 px-4 rounded-md bg-zinc-700 w-3/5 items-center font-bold flex justify-center'>Submit and continue</button>
       </form>
     </div>
   );

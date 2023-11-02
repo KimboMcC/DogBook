@@ -33,8 +33,6 @@ function getTimeAgo(APItime) {
       }
 }
 
-
-
 const Post = ( props ) => {
     const { userFirst, userLast, time, text, likes, pp, tags, postKey, content, } = props
     const timeAgo = getTimeAgo(time);

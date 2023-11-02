@@ -5,10 +5,11 @@ const userSlice = createSlice({
     name: 'user',
     initialState: {
         loggedIn: true, // SET AS TRUE FOR TESTING MAKE SURE TO SWITCH BACK WHEN FINSIHED
-        firstName: 'kik',
-        lastName: 'mcc',
-        pp: '../../images/Rectangle 1.png',
+        firstName: 'Kim',
+        lastName: 'Kimson',
+        pp: '',
         id: '4321646553',
+        savedPosts: []
     },
     reducers: {
         logIn: (state, action) => {
@@ -18,11 +19,14 @@ const userSlice = createSlice({
             state.pp = action.payload.pp
         },
         logOut: (state) => {
-            state.loggedIn= false
+            state.loggedIn = false
             state.firstName = ''
             state.lastName = ''
             state.pp = ''
         },
+        savePost: (state, action) => {
+            state.savedPosts.push(action.payload)
+        }
     },
 })
 

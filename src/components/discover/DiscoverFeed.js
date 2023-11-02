@@ -1,24 +1,23 @@
 import Post from '../post/post';
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { selectPosts } from '../../redux/posts/postsSlice';
+
 
 const DiscoverFeed = () => {
   const [posts, setPosts] = useState([]);
+  const postsState = useSelector(selectPosts);
+  const { postArray, loading } = postsState;
 
-  useEffect(() => {
-    fetch(`https://dummyapi.io/data/v1/post/`, {
-      headers: {
-        'app-id': process.env.REACT_APP_API_KEY,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => setPosts(data.data))
-      .catch((error) => console.error('Error', error));
-  }, []);
+  if (postArray.length === 0) {
+    console.log(postsState)
+    return <div>No posts available.</div>;
+  }
 
   return (
     <>
-      {posts.map((post) => {
-        const owner = post.owner || {}; // Ensure post.owner is an object
+      {postArray.map((post) => {
+        const owner = post.owner || {}; 
         return (
           <Post 
             key={post.id}
