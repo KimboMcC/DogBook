@@ -4,9 +4,9 @@ import pp1 from '../../images/Rectangle 1.png'
 const userSlice = createSlice({
     name: 'user',
     initialState: {
-        loggedIn: false, // SET AS TRUE FOR TESTING MAKE SURE TO SWITCH BACK WHEN FINSIHED
-        firstName: '',
-        lastName: '',
+        loggedIn: true, // SET AS TRUE FOR TESTING MAKE SURE TO SWITCH BACK WHEN FINSIHED
+        firstName: 'Kim',
+        lastName: 'McCauley',
         pp: '',
         id: '4321646553',
         savedPosts: []

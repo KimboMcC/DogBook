@@ -1,12 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react';
 import { faHeart, faComment, faClock, faBookmark } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as fasHeart, faBookmark as fasBookmark } from '@fortawesome/free-solid-svg-icons';
 import Tag from '../tag/Tag'
 import { loadComment, selectComments } from '../../redux/comments/commentsSlice';
 import CommentSection from '../comments/CommentSection';
 import AddComment from '../comments/AddComment';
 import { useDispatch, useSelector } from 'react-redux';
-import { addLike, removeLike } from '../../redux/posts/postsSlice';
+import { addLike, removeLike, selectPost } from '../../redux/posts/postsSlice';
+
 
 function getTimeAgo(APItime) {
     const apiDate = new Date(APItime)
@@ -38,19 +40,41 @@ function getTimeAgo(APItime) {
 const Post = ( props ) => {
     const { userFirst, userLast, time, text, likes, pp, tags, postKey, content, } = props
     const timeAgo = getTimeAgo(time);
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState([])
     const [postComments, setPostComments] = useState([])
     const [ isVisible, setIsVisible ] = useState(false)
     const {commentArray} = useSelector(selectComments)
     const dispatch = useDispatch()
+    const [ liked, setLiked ] = useState(false)
+    const [ saved, setSaved ] = useState(false)
+    const key = postKey
+    const filteredPost = useSelector((state) => selectPost(state, key))
 
+
+    if (postArray.length)
     function toggleComments() {
         setIsVisible(!isVisible)
         console.log(postComments)
     }
 
     function likePlus() {
-        dispatch(addLike(postKey))
+        if (liked) {
+            dispatch(removeLike(postKey))
+            setLiked(false)
+        } else {
+            dispatch(addLike(postKey))
+            setLiked(true)
+        }
+    }
+
+    function postSave() {
+        if (saved) {
+            setSaved(false)
+        } else {
+            console.log(filteredPost)
+            
+            setSaved(true)
+        }
     }
 
     useEffect(() => {
@@ -102,17 +126,17 @@ const Post = ( props ) => {
                                  <Tag key={index} tags={tag}/>
                             ))}
                         </div>
-                        <div className='flex justify-around'>
-                            <div className="interactions items-center flex w-min">
-                                    <p className='mr-2 font-medium'>{likes}</p>
-                                    <FontAwesomeIcon icon={faHeart} onClick={likePlus}/>
+                        <div className='flex justify-around ml-7'>
+                            <div className="interactions items-center flex justify-between relative">
+                                    <p className='mr-2 font-medium absolute right-4'>{likes}</p>
+                                    <FontAwesomeIcon icon={liked ? fasHeart : faHeart} onClick={likePlus}/>
                             </div>
-                            <div onClick={toggleComments} className="interactions items-center flex w-min">
-                                    <p className='mr-2 font-medium'>{postComments.length}</p>
+                            <div onClick={toggleComments} className="interactions items-center relative flex w-min">
+                                    <p className='mr-2 font-medium absolute right-4'>{postComments.length}</p>
                                     <FontAwesomeIcon icon={faComment} />
                             </div>
                             <div className="interactions items-center flex w-min">
-                                    <FontAwesomeIcon icon={faBookmark} />
+                                    <FontAwesomeIcon icon={saved ? fasBookmark : faBookmark} onClick={postSave}/>
                             </div>
                         </div>
                         <AddComment postKey={postKey}/> 

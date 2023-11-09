@@ -1,4 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, createSelector } from "@reduxjs/toolkit";
+
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
     const response = await fetch('https://dummyapi.io/data/v1/post/?limit=20', {
@@ -18,14 +19,18 @@ const postSlice = createSlice ({
     },
     reducers: {
         addLike: (state, action) => {
-            const postIndex = state.postArray.findIndex((post) => post.id === action.payload.postId)
-            state.postArray[postIndex].likes += 1
+            const selectedPost = state.postArray.find((post) => post.id === action.payload);
+            selectedPost.likes += 1;
         },
         removeLike: (state, action) => {
-            const postIndex = state.postArray.findIndex((post) => post.id === action.payload.postId)
-            state.postArray[postIndex].likes -= 1
+            const selectedPost = state.postArray.find((post) => post.id === action.payload);
+            selectedPost.likes -= 1;
         },
-    },
+        savePost: (state, action) => {
+            const selectedPost = state.postArray.find((post) => post.id === action.payload)
+
+        }
+    },  
     extraReducers: (builder) => {
         builder
             .addCase(fetchPosts.fulfilled, (state, action) => {
@@ -41,6 +46,21 @@ const postSlice = createSlice ({
             })
     }
 })
+
+const selectPostArray = (state) => state.posts.postArray;
+
+// Define a selector to retrieve a post by its id
+export const selectPost = createSelector(
+    [selectPostArray],
+    (postArray, key) => {
+      const filteredPost = postArray.find((post) => post.id === key);
+      if (!filteredPost) {
+        console.warn(`No post found for postKey: ${key}`);
+        console.log(key)
+      }
+      return filteredPost;
+    }
+  );
 
 export const { addLike, removeLike } = postSlice.actions
 export const selectPosts = ( state ) => state.posts
