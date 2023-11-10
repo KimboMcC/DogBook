@@ -7,7 +7,8 @@ import { loadComment, selectComments } from '../../redux/comments/commentsSlice'
 import CommentSection from '../comments/CommentSection';
 import AddComment from '../comments/AddComment';
 import { useDispatch, useSelector } from 'react-redux';
-import { addLike, removeLike, selectPost } from '../../redux/posts/postsSlice';
+import { addLike, removeLike, selectPostArray, selectPost } from '../../redux/posts/postsSlice';
+import { savePost } from '../../redux/accounts/accountsSlice';
 
 
 function getTimeAgo(APItime) {
@@ -38,7 +39,7 @@ function getTimeAgo(APItime) {
 }
 
 const Post = ( props ) => {
-    const { userFirst, userLast, time, text, likes, pp, tags, postKey, content, } = props
+    const { userFirst, userLast, time, text, likes, pp, tags, postKey, content, key } = props
     const timeAgo = getTimeAgo(time);
     const [comments, setComments] = useState([])
     const [postComments, setPostComments] = useState([])
@@ -47,14 +48,18 @@ const Post = ( props ) => {
     const dispatch = useDispatch()
     const [ liked, setLiked ] = useState(false)
     const [ saved, setSaved ] = useState(false)
-    const key = postKey
-    const filteredPost = useSelector((state) => selectPost(state, key))
 
 
-    if (postArray.length)
+    
+
     function toggleComments() {
         setIsVisible(!isVisible)
         console.log(postComments)
+    }
+
+    const mapState = state => {
+        const filteredItems = selectPost(state)
+        console.log(filteredItems)
     }
 
     function likePlus() {
@@ -71,9 +76,8 @@ const Post = ( props ) => {
         if (saved) {
             setSaved(false)
         } else {
-            console.log(filteredPost)
-            
             setSaved(true)
+            dispatch(savePost(props))
         }
     }
 

@@ -26,13 +26,15 @@ const userSlice = createSlice({
         },
         savePost: (state, action) => {
             state.savedPosts.push(action.payload)
+            console.log(JSON.parse(JSON.stringify(state.savedPosts)))
         }
     },
 })
 
-export const { logIn, logOut } = userSlice.actions
+export const { logIn, logOut, savePost } = userSlice.actions
 export const selectUser = ( state ) => state.user
 export default userSlice.reducer
+
 
 /*
 loggedIn: true, // SET AS TRUE FOR TESTING MAKE SURE TO SWITCH BACK WHEN FINSIHED
