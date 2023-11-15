@@ -7,8 +7,9 @@ import { loadComment, selectComments } from '../../redux/comments/commentsSlice'
 import CommentSection from '../comments/CommentSection';
 import AddComment from '../comments/AddComment';
 import { useDispatch, useSelector } from 'react-redux';
-import { addLike, removeLike, selectPostArray, selectPost } from '../../redux/posts/postsSlice';
-import { savePost } from '../../redux/accounts/accountsSlice';
+import { addLike, removeLike, selectPostArray, selectPost, getSavedPosts, savePost, removePost } from '../../redux/posts/postsSlice';
+
+
 
 
 function getTimeAgo(APItime) {
@@ -48,18 +49,13 @@ const Post = ( props ) => {
     const dispatch = useDispatch()
     const [ liked, setLiked ] = useState(false)
     const [ saved, setSaved ] = useState(false)
+    const aa = useSelector(getSavedPosts)
 
-
-    
+    //Update liked & saved icons using the store, not local useState.
 
     function toggleComments() {
         setIsVisible(!isVisible)
         console.log(postComments)
-    }
-
-    const mapState = state => {
-        const filteredItems = selectPost(state)
-        console.log(filteredItems)
     }
 
     function likePlus() {
@@ -75,9 +71,12 @@ const Post = ( props ) => {
     function postSave() {
         if (saved) {
             setSaved(false)
+            dispatch(removePost(postKey))
+            
         } else {
             setSaved(true)
-            dispatch(savePost(props))
+            dispatch(savePost(postKey))
+            
         }
     }
 

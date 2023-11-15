@@ -21,20 +21,30 @@ const postSlice = createSlice ({
         addLike: (state, action) => {
             const selectedPost = state.postArray.find((post) => post.id === action.payload);
             selectedPost.likes += 1;
+            selectedPost.liked = true;
         },
         removeLike: (state, action) => {
             const selectedPost = state.postArray.find((post) => post.id === action.payload);
             selectedPost.likes -= 1;
+            selectedPost.liked = false;   
         },
         savePost: (state, action) => {
             const selectedPost = state.postArray.find((post) => post.id === action.payload)
-
+            selectedPost.saved = true;
+        },
+        removePost: (state, action) => {
+            const selectedPost = state.postArray.find((post) => post.id === action.payload)
+            selectedPost.saved = false;
         }
     },  
     extraReducers: (builder) => {
         builder
             .addCase(fetchPosts.fulfilled, (state, action) => {
-                state.postArray = action.payload.data
+                state.postArray = action.payload.data.map((post) => ({
+                    ...post,
+                    liked: false,
+                    saved: false
+                }))
                 state.loading = 'succeeded'
             })
             .addCase(fetchPosts.pending, (state) => {
@@ -47,21 +57,12 @@ const postSlice = createSlice ({
     }
 })
 
-const selectPostArray = (state) => state.posts.postArray;
+const getPostArray = ({ posts }) => posts.postArray;
 
-// Define a selector to retrieve a post by its id
-export const selectPost = createSelector(
-    [selectPostArray],
-    (postArray, key) => {
-      const filteredPost = postArray.find((post) => post.id === key);
-      if (!filteredPost) {
-        console.warn(`No post found for postKey: ${key}`);
-        console.log(key)
-      }
-      return filteredPost;
-    }
-  );
+export const getSavedPosts = createSelector([getPostArray], (postArray) =>
+  postArray.filter((post) => post.saved === true)
+);
 
-export const { addLike, removeLike } = postSlice.actions
+export const { addLike, removeLike, savePost, removePost } = postSlice.actions
 export const selectPosts = ( state ) => state.posts
 export default postSlice.reducer
