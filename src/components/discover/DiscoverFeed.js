@@ -35,7 +35,9 @@ const DiscoverFeed = () => {
             content={post.image}
           />
         );
-      })}
+      })}<div className="mb-44 mt-24 text-center text-white">
+      <p className='italic text-sm'>"Nothing to see here, move along"</p>
+    </div>
 
     </>
   

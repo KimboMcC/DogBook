@@ -22,6 +22,7 @@ const postSlice = createSlice ({
             const selectedPost = state.postArray.find((post) => post.id === action.payload);
             selectedPost.likes += 1;
             selectedPost.liked = true;
+            console.log(JSON.stringify(selectedPost))
         },
         removeLike: (state, action) => {
             const selectedPost = state.postArray.find((post) => post.id === action.payload);
@@ -59,9 +60,31 @@ const postSlice = createSlice ({
 
 const getPostArray = ({ posts }) => posts.postArray;
 
-export const getSavedPosts = createSelector([getPostArray], (postArray) =>
-  postArray.filter((post) => post.saved === true)
+export const getSavedPosts = createSelector(
+    [getPostArray], 
+    (postArray) =>
+    postArray.filter((post) => post.saved === true)
 );
+
+export const getInteractions = (postKey) => createSelector(
+    [getPostArray], 
+    (postArray) => {
+        const post = postArray.find((post) => post.id === postKey)
+        const liked = post.liked
+        const saved = post.saved
+        return {
+            liked,
+            saved
+        }
+    }
+)
+
+export const getTags = (searchTag) => createSelector(
+    [getPostArray], 
+    (postArray) => {
+        return postArray.filter((post) => post.tags.includes(searchTag.toLowerCase()))
+    }
+)
 
 export const { addLike, removeLike, savePost, removePost } = postSlice.actions
 export const selectPosts = ( state ) => state.posts

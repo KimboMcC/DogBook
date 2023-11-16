@@ -7,7 +7,7 @@ import { loadComment, selectComments } from '../../redux/comments/commentsSlice'
 import CommentSection from '../comments/CommentSection';
 import AddComment from '../comments/AddComment';
 import { useDispatch, useSelector } from 'react-redux';
-import { addLike, removeLike, selectPostArray, selectPost, getSavedPosts, savePost, removePost } from '../../redux/posts/postsSlice';
+import { addLike, removeLike, selectPostArray, selectPost, getSavedPosts, savePost, removePost, getInteractions } from '../../redux/posts/postsSlice';
 
 
 
@@ -40,43 +40,33 @@ function getTimeAgo(APItime) {
 }
 
 const Post = ( props ) => {
-    const { userFirst, userLast, time, text, likes, pp, tags, postKey, content, key } = props
+    const { userFirst, userLast, time, text, likes, pp, tags, postKey, content } = props
     const timeAgo = getTimeAgo(time);
     const [comments, setComments] = useState([])
     const [postComments, setPostComments] = useState([])
     const [ isVisible, setIsVisible ] = useState(false)
     const {commentArray} = useSelector(selectComments)
     const dispatch = useDispatch()
-    const [ liked, setLiked ] = useState(false)
-    const [ saved, setSaved ] = useState(false)
-    const aa = useSelector(getSavedPosts)
-
-    //Update liked & saved icons using the store, not local useState.
+    const bb = useSelector(getInteractions(postKey))
 
     function toggleComments() {
         setIsVisible(!isVisible)
-        console.log(postComments)
     }
 
     function likePlus() {
-        if (liked) {
+        if (bb.liked) {
             dispatch(removeLike(postKey))
-            setLiked(false)
         } else {
             dispatch(addLike(postKey))
-            setLiked(true)
         }
     }
 
     function postSave() {
-        if (saved) {
-            setSaved(false)
+        if (bb.saved) {
             dispatch(removePost(postKey))
             
         } else {
-            setSaved(true)
             dispatch(savePost(postKey))
-            
         }
     }
 
@@ -132,14 +122,14 @@ const Post = ( props ) => {
                         <div className='flex justify-around ml-7'>
                             <div className="interactions items-center flex justify-between relative">
                                     <p className='mr-2 font-medium absolute right-4'>{likes}</p>
-                                    <FontAwesomeIcon icon={liked ? fasHeart : faHeart} onClick={likePlus}/>
+                                    <FontAwesomeIcon icon={bb.liked ? fasHeart : faHeart} onClick={likePlus}/>
                             </div>
                             <div onClick={toggleComments} className="interactions items-center relative flex w-min">
                                     <p className='mr-2 font-medium absolute right-4'>{postComments.length}</p>
                                     <FontAwesomeIcon icon={faComment} />
                             </div>
                             <div className="interactions items-center flex w-min">
-                                    <FontAwesomeIcon icon={saved ? fasBookmark : faBookmark} onClick={postSave}/>
+                                    <FontAwesomeIcon icon={bb.saved ? fasBookmark : faBookmark} onClick={postSave}/>
                             </div>
                         </div>
                         <AddComment postKey={postKey}/> 
