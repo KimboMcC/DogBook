@@ -55,14 +55,14 @@ const AddComment = ( props ) => {
       
 
     return (
-        <div className="bg-zinc-800 flex rounded-md p-2 px-3">
+        <div className="bg-zinc-700 flex rounded-md p-2 px-3">
             <div className='flex w-full'>
                 <div className='w-10 h-10 pt-0.5 mr-2'>
                     <img className="rounded-full" src={user.pp} alt="profile"/>
                 </div>
                 <form className='flex justify-between w-full items-center' onSubmit={handleSubmit}>
                     <input
-                        className="bg-zinc-800 w-full outline-none"
+                        className="bg-zinc-700 w-full outline-none"
                         type='text'
                         id='comment'
                         name='comment'

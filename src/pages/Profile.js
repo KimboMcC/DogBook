@@ -25,7 +25,7 @@ const Profile = () => {
             <img className="mx-auto mb-2" src={user.pp} width="120px" alt="user profile" />
             <h2 className="text-3xl mx-auto text-white font-semibold">{user.firstName} {user.lastName}</h2>
           </div>
-            <h2>Your saved posts</h2>
+            <h2 className="text-white bg-zinc-600 text-lg font-semibold text-center py-2">Your saved posts</h2>
             {aa.map((post) => {
               return (
                 <>

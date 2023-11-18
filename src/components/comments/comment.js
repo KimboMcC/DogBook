@@ -30,7 +30,7 @@ function Commentz( props ) {
   const timeAgo = getTimeAgo(time);
 
   return (
-    <div className='flex justify-between items-center'>
+    <div className='flex justify-between items-center bg-zinc-800 mx- -mt-3 rounded-md py-2 px-3 '>
       <div className='flex items-center gap-3'>
         <div className='w-8'>
           <img src={pp} alt='user profile' className="rounded-full"/>

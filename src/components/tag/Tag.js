@@ -2,7 +2,7 @@
 const Tag = ( props ) => {
 
     return (
-        <div className="bg-white text-sm text-black px-2 py-0.5 rounded-md mr-2">
+        <div className="bg-zinc-700 text-sm text-white px-3 py-2 rounded-md mr-2">
             <h4>{props.tags}</h4>
         </div>
     )

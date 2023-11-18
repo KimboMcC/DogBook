@@ -6,7 +6,7 @@ const userSlice = createSlice({
     initialState: {
         loggedIn: true, // SET AS TRUE FOR TESTING MAKE SURE TO SWITCH BACK WHEN FINSIHED
         firstName: 'Kim',
-        lastName: 'McCauley',
+        lastName: 'McC',
         pp: '',
         id: '4321646553',
         savedPosts: []
