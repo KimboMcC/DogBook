@@ -1,70 +1,18 @@
-# Getting Started with Create React App
+# PetBook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This was apart of the CodeAcademy Front-End course. The goal was to take what I've learnt so far and create a web-app to showcase the knowledge and skills I've developed so far. This is my first React project, compared to what I was capable of before I started this is a huge leap and I am much more confident in my knowledge. 
 
-## Available Scripts
+## Function over form
 
-In the project directory, you can run:
+It was difficult for me but I've intentionally NOT created this to look or feel polished. Instead of spending days working on the UI/UX this is intended as functionality practice so it lacks much aesthetic polish. What is there simply works.
 
-### `npm start`
+### Redux
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+I learnt Redux for the state management in this project, in hindsight it might've not been complex enough to justify this but in the future this will set-up me up to better apply it.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### What's next?
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Continue the CodeAcademy course and recieve the certificate.
+2. Learn TypeScript and use it in my next project.
+3. Complete a project that starts in Figma to accuretly replicate the stages of professional development. This will allow me to segment the design & development phases and focus on perfecting one before the other.
+4. Make a less generic project. Don't do a basic 'social media' clone every Tom Dick & Harry has. Make something unique, cool and out the box even if it requires more JavaScript. (especially if it requires more complicated JS. Think futureproof).
