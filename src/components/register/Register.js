@@ -34,13 +34,13 @@ const Register = () => {
  
  //ADD SIGN-UP NOW TEXT/register
   return (
-    <div className="text-white p-">
-      <div className="mb-8 mt-8 text-center">
+    <div className="text-white md:w-3/5 lg:w-2/5 m-auto h-screen lg:text-2xl">
+      <div className="mb-8 mt-48 text-center">
         <p className="text-xl mb-1 font-light">Welcome to</p>
-        <h1 className="text-5xl mb-16 font-extrabold tracking-wide">PETBOOK</h1>
+        <h1 className="text-5xl mb-16 font-extrabold tracking-wide ">PETBOOK</h1>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
-        <h2 className='text-lg mb-6 font-semibold border-b-2 text-center'>Enter your name:</h2>
+        <h2 className='text-lg lg:text-2xl mb-6 font-semibold border-b-2 text-center'>Enter your name:</h2>
         <div className='justify-center flex mb-4'>
           <label htmlFor="firstName" className='mr-2'>First name: </label>
           <input
@@ -64,7 +64,7 @@ const Register = () => {
           />
         </div>
         
-        <h2 className="text-lg mb-6 font-semibold border-b-2 text-center mt-12">
+        <h2 className="text-lg mb-6 font-semibold border-b-2 text-center mt-12 lg:text-2xl">
           Choose a profile picture:
         </h2>
         <div className="grid px-5 grid-cols-4 w-full justify-items-center">

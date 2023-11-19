@@ -18,7 +18,7 @@ const DiscoverFeed = () => {
   }
 
   return (
-    <>
+    <div className='bg-zinc-600'>
       {postArray.map((post) => {
         const owner = post.owner || {}; 
         return (
@@ -33,13 +33,13 @@ const DiscoverFeed = () => {
             time={post.publishDate}
             tags={post.tags}
             content={post.image}
+            
           />
         );
-      })}<div className="mb-44 mt-24 text-center text-white">
-      <p className='italic text-sm'>"Nothing to see here, move along"</p>
-    </div>
+      })}
+    
 
-    </>
+    </div>
   
   );
   

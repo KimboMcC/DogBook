@@ -20,7 +20,7 @@ const SearchBar = () => {
     return(
         <>
         <div className="mx-auto text-white bg-zinc-600 flex flex-col items-center">
-            <p className="text-white text-lg font-semibold my-4">Search posts for relevant tags</p>
+            <p className="text-white text-lg font-semibold my-4 lg:text-2xl">Search posts for relevant tags</p>
             <form onSubmit={handleSubmit}>
                 <FontAwesomeIcon className="mr-2" icon={faMagnifyingGlass} />
                 <input
@@ -31,7 +31,7 @@ const SearchBar = () => {
                     onChange={handleChange}
                 />
             </form>
-            <div className="flex font-light text-sm my-2">
+            <div className="flex font-light text-sm lg:text-lg my-2">
                 <p>Found {t.length} posts matching: </p>
                 <p className="italic"> {searchTag}</p>
             </div>

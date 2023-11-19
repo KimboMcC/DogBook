@@ -30,13 +30,13 @@ function Commentz( props ) {
   const timeAgo = getTimeAgo(time);
 
   return (
-    <div className='flex justify-between items-center bg-zinc-800 mx- -mt-3 rounded-md py-2 px-3 '>
+    <div className='flex justify-between items-center bg-zinc-900  -mt-3 rounded-md py-2 px-3 '>
       <div className='flex items-center gap-3'>
         <div className='w-8'>
           <img src={pp} alt='user profile' className="rounded-full"/>
         </div>
         <div>
-          <p className='text-xs opacity-80'>{posted}</p>
+          <p className='text-xs opacity-80 lg:text-lg'>{posted}</p>
           <p className="text-s">{message}</p>
         </div>
       </div>

@@ -95,7 +95,7 @@ const Post = ( props ) => {
       }, [commentArray, postKey]);
 
     return (
-        <div className="whole/post text-white mb-2 w">
+        <div className="whole/post text-white pb-2 lg:w-2/5 mx-auto bg-zinc-800  lg:text-xl">
             <div className=''>
                 <img alt='users post' src={content}></img>
             </div>
@@ -106,14 +106,14 @@ const Post = ( props ) => {
                             <div className='w-12 mr-4'>
                                 <img className='rounded-full' alt="User profile" src={pp}></img>
                             </div>
-                            <p className='font-medium'>{userFirst} {userLast}</p>
+                            <p className='font-medium  lg:text-2xl'>{userFirst} {userLast}</p>
                         </div>
                         <div className="interactions items-center flex w-min">
-                            <p className='mr-2 font-medium'>{timeAgo}</p>
+                            <p className='mr-2 font-medium  lg:text-xl'>{timeAgo}</p>
                             <FontAwesomeIcon icon={faClock} />
                         </div>
                     </div>
-                            <p className='text-lg w-full'>{text}</p>
+                            <p className='text-lg w-full lg:text-2xl'>{text}</p>
                          <div className='flex'>
                             {tags.map((tag, index) => (
                                  <Tag key={index} tags={tag}/>
