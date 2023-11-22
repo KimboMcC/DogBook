@@ -35,7 +35,7 @@ const Register = () => {
  //ADD SIGN-UP NOW TEXT/register
   return (
     <div className="text-white md:w-3/5 lg:w-2/5 m-auto h-screen lg:text-2xl">
-      <div className="mb-8 mt-48 text-center">
+      <div className="mb-8 mt-8 text-center">
         <p className="text-xl mb-1 font-light">Welcome to</p>
         <h1 className="text-5xl mb-16 font-extrabold tracking-wide ">PETBOOK</h1>
       </div>
